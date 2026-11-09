@@ -210,3 +210,5 @@ Business Impact
 The real e-bike margin is 31.9%, not a crazy 600%. This saved the company from buying unnecessary stock.
 I proved that the Gdańsk store (which was going to be penalized for the "worst result") is actually the best location and the only one that hit its target (100.8%).
 Management now sees the actual target completion at 92.4% (instead of a fake 112%). The file is now a bug-free, fully automated tool.
+
+The corrected, fully working file is available in this repository: [Raport_ktory_klamie corrected.xlsx](<Raport_ktory_klamie corrected.xlsx>). The original version is also included for comparison: [Raport_ktory_klamie.xlsx](Raport_ktory_klamie.xlsx).
