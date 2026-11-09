@@ -1,29 +1,32 @@
-**Data Audit Challenge: "The lying Report**
+**Data Audit Challenge: "The lying Report"**
 
 In this project, I take on the role of a Data analyst who inherits a crucial 2025 Sales Report from a former employee. The report is scheduled to be prented to the board in two days. The problem? The report is full of hidden erros.
 
-My task is to audit to provided Excel file,identify the mistakes,fix them, and provide the management with the ture number
+My task is to audit to provided Excel file, identify the mistakes,fix them, and provide the management with the ture number
 
 The original report contains 12 specific errors hidden within the data, formulas, and business logic. Some of these errors completely distort the final business conclusions.
 
 My goals for this project are:
-1. Anaylyze the raw data and find the hidden errors.
+1. Analyze the raw data and find the hidden errors.
 2. List each error, explain why it is wrong, adn describe how I found it.
 3. Rebuild the report to calculate the metrics correctly.
 4. Write an executive memo to the boss with the real numbers and update business insights.
 
 
-Tools & Skills Demonstrated
-Microsoft Excel
-Data Auditing, Data cleaning, Business Logic Verification, Pivot tables, Executive Communication.
+Tools & Skills Demonstrated:
+- Microsoft Excel
+- Data Auditing 
+- Data cleaning 
+- Business Logic Verification
+- Pivot tables
+- Executive Communication
 
 
-Dateset Overview
+Dataset Overview
 
 <img width="770" height="876" alt="image" src="https://github.com/user-attachments/assets/1f803d01-becf-4eb0-95ae-ceb2c1648c39" />
 
 This sheet contains the final summary prepared by the previous analyst. It includes aggregated metrics like Total Net Revenue, Number of Transactions, and Sales by City.
-
 
 
 <img width="1502" height="917" alt="image" src="https://github.com/user-attachments/assets/f1fc3306-2b12-44f3-b253-3ed6b874e53b" />
@@ -46,9 +49,9 @@ The core dataset containing 14,998 rows of sales transactions from 2025.
   <img width="1061" height="891" alt="image" src="https://github.com/user-attachments/assets/ccd37afa-188c-472f-a68a-519ca7ec52da" />
 
 The official catalog used to verify pricing and costs.
-*ID_produktu - Product code matching the transaction data
-*Nazwa_produktu - Name of the product
-* Kategoria -Category
+* ID_produktu - Product code matching the transaction data
+* Nazwa_produktu - Name of the product
+* Kategoria - Category
 * Cena_katologowa - Official standard price
 * Koszt_jednostkowy - Official standard price
 
@@ -57,7 +60,7 @@ The official catalog used to verify pricing and costs.
 
 <img width="1025" height="906" alt="image" src="https://github.com/user-attachments/assets/ed393915-5f83-443a-a6dc-36786f886da3" />
 
-An additional catalog, likely for new releases like e-bikes 
+An additional catalog, likely for new releases like e-bikes: 
 
 
 <img width="775" height="920" alt="image" src="https://github.com/user-attachments/assets/fd4a1956-e8c6-49ef-ad6a-bd892126354c" />
@@ -68,10 +71,10 @@ A small lookup table containing the 2025 revenue targets for specific cities.
 **Discovered Errors & Fixes**
 1. I began searching for errors in the data sheet. The formula was missing a fourth parameter, which defaults to TRUE—signifying an "approximate match." Consequently, if the value being searched for is not present in the table, Excel makes a "guess" which can lead to errors.
 <img width="1338" height="195" alt="image" src="https://github.com/user-attachments/assets/c5270781-3ef6-46ec-b63b-e2bd60920ed7" />
-That is why I changed this value to FALSE
+That is why I changed this value to FALSE:
 <img width="1340" height="218" alt="image" src="https://github.com/user-attachments/assets/3e58366e-7780-488e-868b-a9a87158764e" />
 2. Because of this, I noticed another error. Several rows in the 'Koszt" column started displaying an #N/A error.
-<img width="1370" height="746" alt="image" src="https://github.com/user-attachments/assets/580e8919-ba4b-45fd-91bf-b2e709320edf" />
+<img width="1370" height="746" alt="image" src="https://github.com/user-attachments/assets/c1c3c22f-95a1-4717-b39d-654f5e78b4f1" />
 I realized that this error occurs with new products from the "Produkty_nowe" sheet.
 I fixed this error using the "Jeżeli.błąd"
 <img width="1485" height="382" alt="image" src="https://github.com/user-attachments/assets/f3434797-2414-4f7c-b8d7-a2100673c9ee" />
@@ -85,10 +88,15 @@ From a business perspective, this is a serious error. Duplicates cause numerous 
 <img width="460" height="245" alt="image" src="https://github.com/user-attachments/assets/ae1015f9-7fb0-4a2b-8312-9b88396b89e1" />
 
 4. Next, I checked the "report" sheet. In this case, the revenue for 2025 is calculated using a SUM function, which is incorrect because this method includes cancelled transactions.
+
 <img width="543" height="370" alt="image" src="https://github.com/user-attachments/assets/7f337c31-217c-4833-af0e-004c1de6ad8b" />
+
 To fix this, I used to SUMA.JEŻELI and set the criterion to "Zrealizowane", so it only count completed transactions.
+
 <img width="886" height="367" alt="image" src="https://github.com/user-attachments/assets/06fa98f7-8f5b-4237-9d59-a7a5e321bb84" />
+
 5. The number of transactions is also calculated incorrectly. It includes unexecuted transactions.
+
 <img width="702" height="376" alt="image" src="https://github.com/user-attachments/assets/9f20f099-bb6d-4655-b94c-9d1da302f760" />
 
 To fix this, I used the LICZ.JEZELI function to count only the rows where the order status is  marked as "Zrealizowana" This prevents the number of transactions from being overstated due to unrealized transactions.
@@ -107,6 +115,7 @@ I discarded that formula and simply divided the net revenue by the number of tra
 7. While verifying the "cel roczny sieci", I noticed the value in cell B8 was hardcoded as '13 500 000' instead of dynamically pulling from the official 'cele' sheet.
    
 <img width="742" height="392" alt="image" src="https://github.com/user-attachments/assets/78374c22-2ab2-43b7-8c35-43e8eb5d0d86" />
+ 
  I deleted the hardcoded number and replaced it with a dynamic 'SUMA' formula
  
  <img width="732" height="350" alt="image" src="https://github.com/user-attachments/assets/d410a9f3-12f6-47cd-b93b-18561b00ce98" />
@@ -114,6 +123,7 @@ I discarded that formula and simply divided the net revenue by the number of tra
  8. Including Cancelled Orders in "Koszt sprzedanych towarów".  It was calculated using a simple 'SUMA' function, which wrongly included the costs of cancelled orders.
 
 <img width="747" height="416" alt="image" src="https://github.com/user-attachments/assets/bf7df377-9adb-430e-b34b-33b4ed6957fb" />
+
 This is an error in financial reporting, as it artificially inflates costs. I replaced the 'SUMA' function with a 'SUMA.JEŻELI' formula to ensure we only sum the costs for transactions explicitly marked as "Zrealizowana"
 
 <img width="905" height="387" alt="image" src="https://github.com/user-attachments/assets/44f7e3ab-10ce-43aa-8e70-85e6b6ef3d62" />
@@ -145,8 +155,8 @@ I fully locked the sum range with '$' signs '$J$2:$J$14821' to freeze it in plac
 
 
 12. While checking the total revenue against the store breakdown, I found they didn't match. Looking closely at the data, there were two entries for Krakow—one spelled with the Polish accent (Kraków) and one without (Krakow). Because the formula was only looking for "Kraków," all the sales listed under "Krakow" were left out of the total.
-    
-<img width="327" height="677" alt="image" src="https://github.com/user-attachments/assets/45840b66-cb27-4d27-905a-07ac095502fe" />
+
+<img width="327" height="677" alt="image" src="https://github.com/user-attachments/assets/5fe83631-8c61-40a7-a696-b672280cbfaa" />
 
 I used Excel's Find & Replace tool to standardize all entries in the Store column to the correct spelling "Kraków".
 
